@@ -1,0 +1,162 @@
+<style>
+  p {
+      border-left:solid black 1px;
+      border-top:solid black 1px;
+      border-right:solid black 1px;
+      border-bottom: solid black 1px;
+      border-radius:6px;
+  }
+      .border{
+      border-left:solid black 1px;
+      border-top:solid black 1px;
+      border-right:solid black 1px;
+      border-bottom: solid black 1px;
+      border-radius:6px;  
+      }
+      .nobord{
+      border-left:none;
+      border-top:none;
+      border-right:none;
+      border-bottom: none; 
+      }
+      .container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+  </style>
+  <script>
+    function sub()
+    {
+      
+        var v = document.getElementsByName('formNum')[0].value;
+        var date = document.getElementsByName('dd')[0].value;
+
+        var dk = document.querySelector('.dk').checked;
+
+        var url = "http://localhost:8888/send";
+
+        var params = "num="+v+"&date="+date+"&dk="+dk;
+        var http = new XMLHttpRequest();
+        http.open("GET", url+"?"+params, true);
+        http.onreadystatechange = function()
+        {
+            if(http.readyState == 4 && http.status == 200) {
+              //document.write(http.response);
+                //alert(http.responseText);
+            }
+        }
+        
+        http.send(null);
+    }
+   
+  </script>
+ 
+  <html>
+      <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+      <body>
+              <div class="w3-row">
+                  <div class="w3-col w3-container w3-light-grey w3-round-xxlarge" style="width:20%">
+                      <p><font style="font-size: 30px; color: black"> Форма Патруля</font></p>
+                  </div>
+                  <div class="w3-col w3-container w3-white" style="width:20%">
+                      <p>
+                          <font style="font-size: 20px">Номер формы</font><br><input name="formNum" type="number" value="0007">
+                      </p>
+                  </div>
+                  <div class="w3-col w3-container w3-white" style="width:20%">
+                      <p>
+                          <font style="font-size: 20px">Номер формы</font><br>
+                          <input name="dd" value="2007-01-01" type="date">
+                      </p>
+                  </div>
+              </div>
+          <hr width="60%">
+              <div class="w3-row">
+                      <div class="w3-col w3-container w3-white" style="width:14%">
+                          <p>
+                              <font style="font-size:15px ">Патруль отмечен у ДК </font>&nbsp; &nbsp;&nbsp;&nbsp;
+                          </p>
+                      </div>
+                      <div class="w3-col w3-container w3-white" style="width:20%">
+                        <p class="nobord">
+								<label class="container">
+									<input class="dk" type="checkbox">
+									<span class="checkmark"></span>
+								  </label>
+                        </p>
+                      </div>
+              </div>
+              <div class="w3-row">
+                <div class="w3-col w3-container w3-light-grey w3-round-large" style="width:20%">
+                  <p>
+                    <input type="button" style="width:100%" onclick="sub()">
+                  </p>
+                </div>
+
+              </div>
+  
+  
+      </body>
+  </html>

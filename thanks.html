@@ -1,0 +1,221 @@
+<html>
+<style>
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:800);
+/* Main styles */
+.text {
+  fill: none;
+  stroke-width: 3;
+  stroke-linejoin: round;
+  stroke-dasharray: 70 330;
+  stroke-dashoffset: 0;
+  -webkit-animation: stroke 6s infinite linear;
+  animation: stroke 6s infinite linear;
+}
+.text:nth-child(5n + 1) {
+  stroke: #f2385a;
+  -webkit-animation-delay: -1.2s;
+  animation-delay: -1.2s;
+}
+.text:nth-child(5n + 2) {
+  stroke: #f5a503;
+  -webkit-animation-delay: -2.4s;
+  animation-delay: -2.4s;
+}
+.text:nth-child(5n + 3) {
+  stroke: #e9f1df;
+  -webkit-animation-delay: -3.6s;
+  animation-delay: -3.6s;
+}
+.text:nth-child(5n + 4) {
+  stroke: #56d9cd;
+  -webkit-animation-delay: -4.8s;
+  animation-delay: -4.8s;
+}
+.text:nth-child(5n + 5) {
+  stroke: #3aa1bf;
+  -webkit-animation-delay: -6s;
+  animation-delay: -6s;
+}
+@-webkit-keyframes stroke {
+  100% {
+    stroke-dashoffset: -400;
+  }
+}
+@keyframes stroke {
+  100% {
+    stroke-dashoffset: -400;
+  }
+}
+/* Other styles */
+html, body {
+  height: 100%;
+}
+body {
+  background: #111;
+  background-size: 0.2em 100%;
+  font: 3em Open Sans, Impact;
+  text-transform: uppercase;
+  margin: 0;
+}
+svg {
+ 
+}
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat:900');
+html, body {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.container ul.menu {
+  height: 50px;
+  width: 50px;
+}
+.container ul.menu li {
+  position: relative;
+  background: white;
+  margin: 10px;
+  height: 8px;
+  width: 50px;
+  transition: transform 0.3s, width 0.3s;
+}
+.container .active_menu li:nth-child(1) {
+  top: 18px;
+  transform: rotate(135deg);
+  transition: transform 0.3s;
+}
+.container .active_menu li:nth-child(2) {
+  width: 0;
+  transition: width 0.3s;
+}
+.container .active_menu li:nth-child(3) {
+  bottom: 18px;
+  transform: rotate(-135deg);
+  transition: transform 0.3s;
+}
+.container ul.links {
+  overflow: hidden;
+  width: 0;
+  margin-left: 0px;
+  transition: width 0.4s, margin-left 0.4s;
+}
+.container ul.links li {
+  margin: 5px;
+}
+.container ul.links li a {
+  color: white;
+  text-decoration: none;
+  transition: color 0.5s;
+  text-transform: uppercase;
+  font-size: 54px;
+  font-family: 'Montserrat', sans-serif;
+  transition: color 0.5s, margin-left 0.5s;
+}
+.container ul.links li a:hover {
+  color: black;
+  margin-left: 20px;
+  transition: color 0.5s, margin-left 0.5s;
+}
+.container .active_links {
+  width: 370px !important;
+  margin-left: 35px !important;
+  transition: width 0.4s, margin-left 0.4s;
+}
+
+</style>
+<script>
+  function menu(){
+  var menu = document.querySelector(".menu");
+  var links = document.querySelector(".links");
+
+  //document.getElementsByName('main')[0].addEventListener("click", main);
+
+  menu.addEventListener("click",function(e){
+    e.preventDefault();
+    if(!(this.classList.contains('active_menu'))){
+      this.classList.toggle("active_menu");
+      links.classList.add("active_links");
+    } else {
+      this.classList.remove("active_menu");
+      links.classList.remove("active_links");
+    }
+  });
+
+  
+}
+function main()
+    {
+        var url = "http://localhost:8888/main";
+        var http = new XMLHttpRequest();
+        http.open("GET", url, true);
+        http.onreadystatechange = function()
+        {
+            if(http.readyState == 4 && http.status == 200) 
+            {
+              document.body.innerHTML = '';
+              document.head.innerHTML = '';
+              document.write(http.response);
+              window.onload();
+            //alert(http.responseText);
+            }
+        }
+
+        http.send(null);        
+    }
+</script>
+    <head>
+        <link rel="shortcut icon" href="https://pp.userapi.com/c636028/v636028852/42ec/UWcdUoi_Lw4.jpg?ava=1" />
+    </head>
+    <body>
+        <svg style="width: 600px; position: relative; top: -150px; transform: scale(1.5);"><!-- Symbol-->
+          <symbol id="s-text">
+          <text text-anchor="middle" x="50%" y="20%" dy=".5em">
+            Форма отправлена
+          </text>
+          </symbol><!-- Duplicate symbols-->
+            <use class="text" xlink:href="#s-text">
+              
+            </use>
+            <use class="text" xlink:href="#s-text">
+
+            </use>
+            <use class="text" xlink:href="#s-text">
+
+            </use>
+            <use class="text" xlink:href="#s-text">
+
+            </use>
+            <use class="text" xlink:href="#s-text">
+
+            </use>
+        </svg>
+         
+         <div class="container">
+          <ul class="menu">
+            <li></li>
+            <li></li>
+            <li></li>
+          </ul>
+          <ul class="links">
+            <li><a href="http://localhost:8888/main">Меню</a></li>
+            <li><a href="http://localhost:8888/form">Патрули</a></li>
+            <li><a href="http://localhost:8888/do">До</a></li>
+            
+          </ul>
+        </div>
+          <script>menu();</script>
+    </body>
+
+
+</html>

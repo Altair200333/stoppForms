@@ -1,0 +1,572 @@
+<style>
+  input[type=text],
+  select,
+  textarea {
+    width: 100%;
+    /* Full width */
+    padding: 12px;
+    /* Some padding */
+    border: 1px solid #ccc;
+    /* Gray border */
+    border-radius: 4px;
+    /* Rounded borders */
+    box-sizing: border-box;
+    /* Make sure that padding and width stays in place */
+    margin-top: 6px;
+    /* Add a top margin */
+    margin-bottom: 16px;
+    /* Bottom margin */
+    resize: vertical
+      /* Allow the user to vertically resize the textarea (not horizontally) */
+  }
+
+  input[type=number] {
+    width: 100%;
+    /* Full width */
+    padding: 12px;
+    /* Some padding */
+    border: 1px solid #ccc;
+    /* Gray border */
+    border-radius: 4px;
+    /* Rounded borders */
+    box-sizing: border-box;
+    /* Make sure that padding and width stays in place */
+    margin-top: 6px;
+    /* Add a top margin */
+    margin-bottom: 16px;
+    /* Bottom margin */
+    resize: vertical
+      /* Allow the user to vertically resize the textarea (not horizontally) */
+  }
+
+  input[type=date] {
+    width: 70%;
+    /* Full width */
+    padding: 12px;
+    /* Some padding */
+    border: 1px solid #ccc;
+    /* Gray border */
+    border-radius: 4px;
+    /* Rounded borders */
+    box-sizing: border-box;
+    /* Make sure that padding and width stays in place */
+    margin-top: 6px;
+    /* Add a top margin */
+    margin-bottom: 16px;
+    /* Bottom margin */
+    resize: vertical
+      /* Allow the user to vertically resize the textarea (not horizontally) */
+  }
+
+  input[type=time] {
+    width: 70%;
+    /* Full width */
+    padding: 12px;
+    /* Some padding */
+    border: 1px solid #ccc;
+    /* Gray border */
+    border-radius: 4px;
+    /* Rounded borders */
+    box-sizing: border-box;
+    /* Make sure that padding and width stays in place */
+    margin-top: 6px;
+    /* Add a top margin */
+    margin-bottom: 16px;
+    /* Bottom margin */
+    resize: vertical
+      /* Allow the user to vertically resize the textarea (not horizontally) */
+  }
+
+  /* Style the submit button with a specific background color etc */
+  input[type=submit] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  /* When moving the mouse over the submit button, add a darker green color */
+  input[type=submit]:hover {
+    background-color: #45a049;
+  }
+
+  /* Add a background color and some padding around the form */
+  .container {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+  }
+
+
+
+  /* The container */
+  .containerС {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  /* Hide the browser's default checkbox */
+  .containerС input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+
+  /* Create a custom checkbox */
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: rgb(119, 119, 119);
+  }
+
+  /* On mouse-over, add a grey background color */
+  .containerС:hover input~.checkmark {
+    background-color: rgb(61, 61, 61);
+  }
+
+  /* When the checkbox is checked, add a blue background */
+  .containerС input:checked~.checkmark {
+    background-color: #2196F3;
+  }
+
+  /* Create the checkmark/indicator (hidden when not checked) */
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+
+  /* Show the checkmark when checked */
+  .containerС input:checked~.checkmark:after {
+    display: block;
+  }
+
+  /* Style the checkmark/indicator */
+  .containerС .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+
+  h2 {
+    color: black;
+    -webkit-text-fill-color: white;
+    /* Will override color (regardless of order) */
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+  }
+</style>
+
+<script>
+  var convertToBase64 = function(url, imagetype, callback){
+
+var img = document.createElement('IMG'),
+    canvas = document.createElement('CANVAS'),
+    ctx = canvas.getContext('2d'),
+    data = '';
+
+// Set the crossOrigin property of the image element to 'Anonymous',
+// allowing us to load images from other domains so long as that domain 
+// has cross-origin headers properly set
+
+img.crossOrigin = 'Anonymous'
+
+// Because image loading is asynchronous, we define an event listening function that will be called when the image has been loaded
+img.onLoad = function(){
+    // When the image is loaded, this function is called with the image object as its context or 'this' value
+    canvas.height = this.height;
+    canvas.width = this.width;
+    ctx.drawImage(this, 0, 0);
+    data = canvas.toDataURL(imagetype);
+    callback(data);
+};
+
+// We set the source of the image tag to start loading its data. We define 
+// the event listener first, so that if the image has already been loaded 
+// on the page or is cached the event listener will still fire
+
+img.src = url;
+};
+
+// Here we define the function that will send the request to the server. 
+// It will accept the image name, and the base64 data as arguments
+
+var sendBase64ToServer = function(name, base64){
+var httpPost = new XMLHttpRequest(),
+    path = "http://127.0.0.1:8000/uploadImage/" + name,
+    data = JSON.stringify({image: base64});
+httpPost.onreadystatechange = function(err) {
+        if (httpPost.readyState == 4 && httpPost.status == 200){
+            console.log(httpPost.responseText);
+        } else {
+            console.log(err);
+        }
+    };
+// Set the content type of the request to json since that's what's being sent
+httpPost.setHeader('Content-Type', 'application/json');
+httpPost.open("POST", path, true);
+httpPost.send(data);
+};
+
+// This wrapper function will accept the name of the image, the url, and the 
+// image type and perform the request
+
+var uploadImage = function(src, name, type){
+convertToBase64(src, type, function(data){
+    sendBase64ToServer(name, data);
+});
+};
+
+// Call the function with the provided values. The mime type could also be png
+// or webp
+
+
+  var number;
+  var sent = 0;
+  function required(inputtx) 
+   {
+     if (inputtx.length == 0)
+      { 
+         //alert("message");  	
+         return false; 
+      }  	
+      return true; 
+    }
+  function validateTextField(field)
+  {
+    if(!required(field.value))
+    {
+      field.style.border="2px solid red";
+      return 0;
+    }
+    else
+    {
+      field.style.border="";
+      return 1;
+    }
+  }
+  function sub() {
+    if(sent==1)
+    {
+      console.log("exit");
+      return;
+    }
+    sent = 1;
+    var v = document.getElementsByName('formNum')[0].value;
+    var date = document.getElementsByName('dd')[0].value;
+
+    var exit = document.getElementsByName('exit')[0].value;
+    var back = document.getElementsByName('back')[0].value;
+
+    var doval = document.querySelector('.do').checked;
+
+    var dk = document.querySelector('.dk').checked;
+
+    var educating = document.querySelector('.educating').checked;
+    var equiped = document.querySelector('.equiped').checked;
+
+    var mem = document.getElementsByName('members')[0].value;
+    var valid = 0;
+
+    if(!validateTextField(document.getElementsByName('exit')[0]))
+    {
+      valid++;
+    }
+    if(!validateTextField(document.getElementsByName('back')[0]))
+    {
+      valid++;
+    }
+    if(!validateTextField(document.getElementsByName('members')[0]))
+    {
+      valid++;
+    }
+    if(doval === false)
+    {
+      document.getElementById("doval").style = "border-bottom: 2px red solid ;";
+      valid++;
+    }
+    else if(doval === true)
+    {
+      document.getElementById("doval").style="";
+    }
+    if(dk === false)
+    {
+      document.getElementById("dkval").style = "border-bottom: 2px red solid ;";
+      valid++;
+    }
+    else if(dk === true)
+    {
+      document.getElementById("dkval").style="";
+    }
+    if(valid>0)
+    {
+      sent = 0;
+      document.getElementsByName('error')[0].innerText  = "Не все поля заполнены";
+      
+      return;
+    }
+    document.getElementsByName('error')[0].innerText  = "";
+    var url = "http://localhost:8888/send";
+
+    var params = "num=" + v + "&date=" + date + "&dk=" + dk + "&do=" + doval + "&exit=" + exit + "&back=" + back + "&mem=" + mem+"&edu="+educating+"&equ="+equiped;
+    var http = new XMLHttpRequest();
+    http.open("GET", url + "?" + params, true);
+    http.onreadystatechange = function () {
+      if (http.readyState == 4 && http.status == 200) {
+
+        //document.body.innerHTML = '';
+        //document.head.innerHTML = '';
+        //document.write(http.response);
+        //window.onload();
+        html2canvas(document.body).then(function (canvas) {
+          document.body.appendChild(canvas);
+          //uploadImage(canvas.toDataURL(), 'patrolN' + v + '.jpeg', 'image/jpeg')
+          saveAs(canvas.toDataURL(), 'patrolN' + v + '.png');
+          window.open("/thanks", "_top");
+        });
+      }
+      else if(http.status!=200){
+          document.getElementsByName('error')[0].innerText  = "Ошибка при отправке формы; Статус - " + http.status;
+          sent = 0; 
+      } 
+
+    }
+
+    http.send(null);
+  }
+  function saveAs(uri, filename) {
+
+    var link = document.createElement('a');
+
+    if (typeof link.download === 'string') {
+
+      link.href = uri;
+      link.download = filename;
+
+      //Firefox requires the link to be in the body
+      document.body.appendChild(link);
+
+      //simulate click
+      link.click();
+
+      //remove the link when done
+      document.body.removeChild(link);
+
+    } else {
+
+      window.open(uri);
+
+    }
+  }
+  function loadPage() {
+
+    var url = "http://localhost:8888/pnum";
+    var http = new XMLHttpRequest();
+    http.open("GET", url, true);
+    http.onreadystatechange = function () {
+      if (http.readyState == 4 && http.status == 200) {
+        document.getElementsByName('formNum')[0].value = parseInt((http.response),10)+1;
+        console.log(http.response);
+      }
+     
+
+    }
+
+    http.send(null);
+    //var myDate = document.querySelector(myDate);
+    var today = new Date();
+    document.getElementsByName('dd')[0].value = today.toISOString().substr(0, 10);
+  }
+</script>
+
+<html>
+
+<head>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+  <link rel="shortcut icon" href="https://pp.userapi.com/c636028/v636028852/42ec/UWcdUoi_Lw4.jpg?ava=1" />
+
+</head>
+
+<body onload="loadPage()">
+
+  <div class="w3-col w3-container w3-light-grey " style="width:100%">
+    <div class="w3-row">
+      <div class="w3-col w3-container w3-light-grey w3-round-xxlarge" style="width:20%">
+        <label for="fname">
+          <h2>Форма патруля</h2>
+        </label><br>
+      </div>
+      <div class="w3-col w3-container w3-light-grey w3-round-xxlarge" style="width:15%">
+        <label for="fname">Номер Формы</label><br>
+        <input type="number" id="fname" name="formNum" placeholder="Номер формы...">
+      </div>
+      <div class="w3-col w3-container w3-light-grey" style="width:20%">
+        <label for="fname">Дата </label><br>
+        <input name="dd" value="2007-01-01" type="date">
+      </div>
+    </div>
+    <div class="w3-row">
+      <div class="w3-col w3-container w3-light-grey w3-round-xxlarge" style="width:30%">
+        <label for="fname">В патруль идут</label><br>
+        <textarea id="subject" name="members" placeholder="Write something.." style="height:100px"></textarea>
+      </div>
+    </div>
+    <hr style="  border: 1px solid green;
+              border-radius: 5px;" width="50%">
+    <div class="w3-row">
+      <div class="w3-col w3-container w3-light-grey w3-round-xxlarge" style="width:30%">
+        <div class="w3-row">
+          <div class="w3-col w3-container w3-light-grey " style="width:100%">
+
+            <label class="containerС"><font id="dkval">Патруль отмечен у ДК</font>
+              <input class="dk" type="checkbox">
+              <span class="checkmark"></span>
+            </label>
+
+          </div>
+        </div>
+        <div class="w3-row">
+          <br>
+        </div>
+        <div class="w3-row">
+          <div class="w3-col w3-container w3-light-grey " style="width:100%">
+            <label class="containerС">
+              <font id="doval">Патруль отмечен у Дежурного</font>
+              <input class="do" type="checkbox">
+              <span class="checkmark"></span>
+            </label>
+
+          </div>
+          <div class="w3-col w3-container w3-light-grey w3-round-xxlarge" style="width:30%">
+            <label class="containerС" ><font id="sdk">Обучающий</font>
+              <input class="educating" type="checkbox">
+              <span class="checkmark"></span>
+            </label>
+          </div>
+          <div class="w3-row">
+            
+          </div>
+          <div class="w3-col w3-container w3-light-grey w3-round-xxlarge" style="width:30%">
+            <label class="containerС" ><font id="sdk"><nobr>В форме</nobr></font>
+              <input class="equiped" type="checkbox">
+              <span class="checkmark"></span>
+            </label>
+          </div>
+        </div>
+        <div class="w3-row">
+          <br>
+        </div>
+        <div class="w3-row">
+          <div class="w3-col w3-container w3-light-grey " style="width:50%">
+            <label for="fname">Время выхода</label><br>
+            <input type="time" id="fname" name="exit" placeholder="Номер формы...">
+
+          </div>
+          <div class="w3-col w3-container w3-light-grey " style="width:50%">
+            <label for="fname">Время Возврата</label><br>
+            <input type="time" id="fname" name="back" placeholder="Номер формы...">
+
+          </div>
+        </div>
+        <div class="w3-row">
+          <div class="w3-col w3-container w3-light-grey " style="width:100%">
+            <label class="containerС">
+              Маршрут
+            </label>
+          </div>
+        </div>
+        <div class="w3-row">
+          <div class="w3-col w3-container w3-light-grey " style="width:100%">
+
+            <select id="country" name="country">
+              <option value="Студгородок">Студгородок</option>
+              <option value="Большой круг">Большой круг</option>
+              <option value="Другое">Другое</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="w3-col w3-container w3-light-grey w3-round-xxlarge" style="width:20%">
+        <div class="w3-row">
+          <div class="w3-col w3-container w3-white " style="width:100%">
+            <h2>Инвентарь</h2>
+          </div>
+        </div>
+        <div class="w3-row">
+            <div class="w3-col w3-container w3-light-grey  w3-round-xxlarge" id="stock" style="width:100%">
+                <nav>
+                  <ul>
+                    <li>
+                      <font style="font-size:15px">Удары</font>
+                      <input type="number" id="fname" name="starttime" placeholder="Количество" value="0">
+                    </li>
+                  
+                    <li>
+                      <font style="font-size:15px">Балончик</font>
+                      <input type="number" id="fname" name="starttime" placeholder="Количество" value="0">
+                    </li>
+                    <li>
+                      <font style="font-size:15px">Рация</font>
+                      <input type="text" id="fname" name="starttime" placeholder="Номера">
+                    </li>
+                    <li>
+                      <font style="font-size:15px">Фонарики</font>
+                      <input type="number" id="fname" name="starttime" placeholder="Количество" value="0">
+                    </li>
+                    
+                  </ul>
+                </nav>
+      
+              </div>
+        </div>
+      </div>
+    </div>
+    <hr style="  border: 1px solid black;
+              border-radius: 5px;" width="50%">
+    <div class="w3-row">
+      <div class="w3-col w3-container w3-light-grey " style="width:40%">
+        <label for="subject">В патруле замечено</label>
+        <textarea id="subject" name="seen" placeholder="Write something.." style="height:200px"></textarea>
+
+      </div>
+    </div>
+    <div class="w3-row">
+      <br>
+    </div>
+    <div class="w3-row">
+      <div class="w3-col w3-container w3-light-grey " style="width:40%">
+        <h4 id="error" name = "error" style="color:red;"></h4>
+        <input type="submit" value="Submit" onclick="sub()">
+        
+      </div>
+    </div>
+
+  </div>
+
+
+
+</body>
+
+</html>

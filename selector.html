@@ -1,0 +1,168 @@
+<style>
+       * {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+body{
+	background: rgb(49, 49, 49);
+}
+ul{
+	display: flex;
+	width: 100%;
+	height: 80vh;
+	margin: auto;
+	max-width: 1000px;
+	justify-content: space-between;
+	text-align: center;
+}
+li {
+	padding: 1rem 2rem 1.15rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  color: #ebebeb;
+	min-width: 80px;
+	margin: auto;
+}
+
+li:hover {
+  background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/HILLBLU_button_background.svg/1200px-HILLBLU_button_background.svg.png');
+  background-size: 100% 100%;
+  color: #27262c;
+  animation: spring 300ms ease-out;
+  text-shadow: 0 -1px 0 #ef816c;
+	font-weight: bold;
+}
+li:active {
+  transform: translateY(4px);
+}
+
+@keyframes spring {
+  15% {
+    -webkit-transform-origin: center center;
+    -webkit-transform: scale(1.2, 1.1);
+  }
+  40% {
+    -webkit-transform-origin: center center;
+    -webkit-transform: scale(0.95, 0.95);
+  }
+  75% {
+    -webkit-transform-origin: center center;
+    -webkit-transform: scale(1.05, 1);
+  }
+  100% {
+    -webkit-transform-origin: center center;
+    -webkit-transform: scale(1, 1);
+  }
+}
+
+.shameless-plug{
+  position: absolute;
+  bottom: 10px;
+  right: 0;
+  padding: 8px 20px;
+  color: #ccc;
+  text-decoration: none;
+}
+p {
+  text-transform: uppercase;
+  letter-spacing: 0.5em;
+  display: inline-block;
+  border: 4px double rgba(255, 255, 255, .25);
+  border-width: 4px 0;
+  padding: 1.5em 0em;
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  width: 40em;
+  margin: 0 0 0 -20em;
+  color: #ffc476;
+}
+p span {
+  font: 700 4em "Oswald", sans-serif;
+  letter-spacing: 0;
+  padding: 0.1em 0 0.325em;
+  display: block;
+  margin: 0 auto;
+  text-shadow: 0 0 80px rgba(255, 255, 255, .5);
+  /* Clip Background Image */
+  background: url(http://f.cl.ly/items/010q3E1u3p2Q0j1L1S1o/animated_text_fill.png) repeat-y;
+  -webkit-background-clip: text;
+  background-clip: text;
+  /* Animate Background Image */
+  -webkit-text-fill-color: transparent;
+  -webkit-animation: aitf 80s linear infinite;
+  /* Activate hardware acceleration for smoother animations */
+  -webkit-transform: translate3d(0, 0, 0);
+  -webkit-backface-visibility: hidden;
+}
+/* Animate Background Image */
+@-webkit-keyframes aitf {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+</style>
+<script>
+    function form()
+    {
+        var url = "http://localhost:8888/form";
+        var http = new XMLHttpRequest();
+        http.open("GET", url, true);
+        http.onreadystatechange = function()
+        {
+            if(http.readyState == 4 && http.status == 200) {
+              //document.body.innerHTML = '';
+              //document.head.innerHTML = '';
+              //document.write(http.response);
+              //window.onload();
+              window.open("http://localhost:8888/form", "_top");
+            //alert(http.responseText);
+        }
+        }
+
+        http.send(null);        
+    }
+    function doform()
+    {
+        var url = "http://localhost:8888/do";
+        var http = new XMLHttpRequest();
+        http.open("GET", url, true);
+        http.onreadystatechange = function()
+        {
+            if(http.readyState == 4 && http.status == 200) {
+              //document.body.innerHTML = '';
+              //document.head.innerHTML = '';
+              //document.write(http.response);
+              //window.onload();
+              window.open("http://localhost:8888/do", "_top");
+            //alert(http.responseText);
+        }
+        }
+
+        http.send(null);        
+    }
+</script>
+        <html>
+          <head>
+              <link rel="shortcut icon" href="https://pp.userapi.com/c636028/v636028852/42ec/UWcdUoi_Lw4.jpg?ava=1" />
+          </head>
+            <body>
+                    <p>
+                            Заполнение форм by Neo
+                            <span>
+                              Выберите Форму
+                            </span>
+                            &mdash; Сeлектор &mdash;
+                          </p> 
+                    <ul>
+                            <li onclick="form()"><font style="font-size:20px">Патрули</font></li>
+                            <li onclick="doform()"><font style="font-size:20px">ДО</font></li>
+                        </ul>
+                        
+            </body>
+        </html>
+        

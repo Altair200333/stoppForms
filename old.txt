@@ -1,0 +1,268 @@
+<style>
+        * {
+       box-sizing: border-box;
+     }
+     body {
+       margin: 0;
+     }
+     .container-width{
+       width:90%;
+       max-width:1150px;
+       margin:0 auto;
+     }
+     .am-sect{
+       padding-top:100px;
+       padding-bottom:100px;
+       font-family:Helvetica, serif;
+     }
+     .form{
+       border-radius:3px;
+       padding:10px 15px;
+       background-color:rgba(255,255,255,0);
+       float:none;
+     }
+     .input{
+       width:100%;
+       margin-bottom:15px;
+       padding:7px 10px;
+       border-radius:2px;
+       background-color:rgba(255, 255, 255, 0.2);
+       border:none;
+       float:none;
+     }
+     .form{
+       border-radius:3px;
+       padding:10px 15px;
+       background-color:rgba(240, 240, 240, 0.2);
+       float:left;
+     }
+     .button{
+       width:100%;
+       margin:15px 0;
+       background-color:#785580;
+       border:none;
+       color:#fff;
+       border-radius:2px;
+       padding:7px 10px;
+       font-size:1em;
+       cursor:pointer;
+     }
+     .row{
+       display:flex;
+       justify-content:flex-start;
+       align-items:stretch;
+       flex-wrap:nowrap;
+       padding:10px;
+     }
+     .cell{
+       min-height:75px;
+       flex-grow:1;
+       flex-basis:100%;
+     }
+     .form-group{
+       float:none;
+     }
+     body{
+       background-color:#ffffff;
+     }
+     #icpy{
+       display:block;
+       top:10px;
+       opacity:1;
+       border:5px solid black;
+     }
+     #irhi{
+       border:5px solid black;
+     }
+     #i78a{
+       border:5px solid black;
+     }
+     #ingd{
+       padding:10px 10px 10px 0;
+       font-family:Arial Black, Gadget, sans-serif;
+       font-size:24px;
+       float:left;
+       border-radius:0 0 0 0;
+       border:3px solid black;
+       box-shadow:0 0 5px 0 black ;
+     }
+     #iw5lt{
+       flex-basis:203.2%;
+       border-radius:0 0 0 0;
+       border:5px solid black;
+     }
+     #iygux{
+       border:5px solid black;
+     }
+     #ife4{
+       border:3px solid black;
+       flex-basis:155.6%;
+     }
+     #i21b{
+       padding:10px;
+     }
+     #ix4cy{
+       padding:10px;
+     }
+     #il6z5{
+       flex-basis:157.2%;
+       border:3px solid black;
+     }
+     .checkbox{
+       transform:rotateX(0) rotateY(0) rotateZ(0) scaleX(2) scaleY(2) scaleZ(1);
+     }
+     #iafrj{
+       padding:10px;
+       border:3px solid black;
+       float:left;
+     }
+     #iccxs{
+       padding:10px;
+       border:3px solid black;
+       float:left;
+     }
+     #i44ak{
+       flex-basis:41.6%;
+     }
+     @media (max-width: 768px){
+       .row{
+         flex-wrap:wrap;
+       }
+     }
+     
+     
+</style>
+     
+     <script>
+         function sub()
+         {
+             var v = document.getElementsByName('formNum')[0].value;
+             var url = "http://localhost:8888/send";
+             var params = "a="+v;
+             var http = new XMLHttpRequest();
+     
+             http.open("GET", url+"?"+params, true);
+             http.onreadystatechange = function()
+             {
+                 if(http.readyState == 4 && http.status == 200) {
+                   document.write(http.response);
+                     //alert(http.responseText);
+                 }
+             }
+             
+             http.send(null);
+         }
+        
+     </script>
+     
+     <section class="am-sect">
+       <div class="container-width">
+       </div>
+       <div class="row" id="ifwk">
+         <div class="cell" id="i78a">
+           <br class="Apple-interchange-newline"/>
+           <div id="ingd">
+             <b>Форма Патруля
+             </b>
+           </div>
+         </div>
+         <div class="cell" id="irhi">
+           <form class="form">
+             <div class="form-group">
+               <label class="label">Номер формы</label>
+               <input name="formNum" placeholder="Type here your name" class="input"/>
+             </div>
+           </form>
+         </div>
+         <div class="cell" id="icpy">
+           <form class="form">
+             <div class="form-group">
+               <label class="label">Дата</label>
+               <input placeholder="Type here your name" class="input"/>
+             </div>
+           </form>
+         </div>
+       </div>
+       <div class="row" id="ic1zf">
+         <div class="cell" id="iw5lt">
+           <div class="row" id="iq1i">
+             <div class="cell" id="ife4">
+               <div id="i21b">Патруль отмечен у ДК
+               </div>
+             </div>
+             <div class="cell" id="ioxc">
+               <form class="form">
+                 <input type="checkbox" class="checkbox"/>
+               </form>
+             </div>
+           </div>
+           <div class="row">
+             <div class="cell" id="il6z5">
+               <div id="ix4cy">Патруль отмечен у дужурного по ОПОП
+               </div>
+             </div>
+             <div class="cell">
+               <form class="form">
+                 <input type="checkbox" class="checkbox" id="i7qok"/>
+               </form>
+             </div>
+           </div>
+           <div class="row">
+             <div class="cell" id="i4ty3">
+               <div class="row">
+                 <div class="cell">
+                   <div id="iccxs">Время выхода
+                   </div>
+                 </div>
+                 <div class="cell" id="ihhyq">
+                   <form class="form">
+                     <div class="form-group">
+                       <input placeholder="Type here your name" class="input"/>
+                     </div>
+                   </form>
+                 </div>
+               </div>
+             </div>
+             <div class="cell">
+               <div class="row">
+                 <div class="cell">
+                   <div id="iafrj">Время возврата
+                   </div>
+                 </div>
+                 <div class="cell">
+                   <form class="form">
+                     <div class="form-group">
+                       <input placeholder="Type here your name" class="input"/>
+                     </div>
+                   </form>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+         <div class="cell" id="iygux">
+         </div>
+       </div>
+       <div class="row" id="ikvmt">
+         <div class="cell" id="iqlef">
+           <form class="form">
+             <div class="form-group">
+               <label class="label">Форму заполнил</label>
+               <input placeholder="Type here your name" class="input"/>
+             </div>
+           </form>
+         </div>
+         <div class="cell">
+         </div>
+         <div class="cell" id="i44ak">
+           <form class="form">
+             <div class="form-group">
+               <button  class="button"  onclick="sub()">Отправить</button>
+             </div>
+           </form>
+         </div>
+       </div>
+     </section>
+
+
+

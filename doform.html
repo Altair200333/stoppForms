@@ -1,0 +1,702 @@
+<style>
+  input[type=text],
+  select,
+  textarea {
+    width: 100%;
+    /* Full width */
+    padding: 12px;
+    /* Some padding */
+    border: 1px solid #ccc;
+    /* Gray border */
+    border-radius: 4px;
+    /* Rounded borders */
+    box-sizing: border-box;
+    /* Make sure that padding and width stays in place */
+    margin-top: 6px;
+    /* Add a top margin */
+    margin-bottom: 16px;
+    /* Bottom margin */
+    resize: vertical
+      /* Allow the user to vertically resize the textarea (not horizontally) */
+  }
+
+  input[type=number] {
+    width: 100%;
+    /* Full width */
+    padding: 12px;
+    /* Some padding */
+    border: 1px solid #ccc;
+    /* Gray border */
+    border-radius: 4px;
+    /* Rounded borders */
+    box-sizing: border-box;
+    /* Make sure that padding and width stays in place */
+    margin-top: 6px;
+    /* Add a top margin */
+    margin-bottom: 16px;
+    /* Bottom margin */
+    resize: vertical
+      /* Allow the user to vertically resize the textarea (not horizontally) */
+  }
+
+  input[type=date] {
+    width: 70%;
+    /* Full width */
+    padding: 12px;
+    /* Some padding */
+    border: 1px solid #ccc;
+    /* Gray border */
+    border-radius: 4px;
+    /* Rounded borders */
+    box-sizing: border-box;
+    /* Make sure that padding and width stays in place */
+    margin-top: 6px;
+    /* Add a top margin */
+    margin-bottom: 16px;
+    /* Bottom margin */
+    resize: vertical
+      /* Allow the user to vertically resize the textarea (not horizontally) */
+  }
+
+  input[type=time] {
+    width: 70%;
+    /* Full width */
+    padding: 12px;
+    /* Some padding */
+    border: 1px solid #ccc;
+    /* Gray border */
+    border-radius: 4px;
+    /* Rounded borders */
+    box-sizing: border-box;
+    /* Make sure that padding and width stays in place */
+    margin-top: 6px;
+    /* Add a top margin */
+    margin-bottom: 16px;
+    /* Bottom margin */
+    resize: vertical
+      /* Allow the user to vertically resize the textarea (not horizontally) */
+  }
+
+  /* Style the submit button with a specific background color etc */
+  input[type=submit] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  /* When moving the mouse over the submit button, add a darker green color */
+  input[type=submit]:hover {
+    background-color: #45a049;
+  }
+
+  /* Add a background color and some padding around the form */
+  .container {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+  }
+
+
+
+  /* The container */
+  .containerС {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  /* Hide the browser's default checkbox */
+  .containerС input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+
+  /* Create a custom checkbox */
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: rgb(119, 119, 119);
+  }
+
+  /* On mouse-over, add a grey background color */
+  .containerС:hover input~.checkmark {
+    background-color: rgb(61, 61, 61);
+  }
+
+  /* When the checkbox is checked, add a blue background */
+  .containerС input:checked~.checkmark {
+    background-color: #2196F3;
+  }
+
+  /* Create the checkmark/indicator (hidden when not checked) */
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+
+  /* Show the checkmark when checked */
+  .containerС input:checked~.checkmark:after {
+    display: block;
+  }
+
+  /* Style the checkmark/indicator */
+  .containerС .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+
+  h2 {
+    color: black;
+    -webkit-text-fill-color: white;
+    /* Will override color (regardless of order) */
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+  }
+
+  /* RB STYLES*/
+  * {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+  }
+
+  body {
+    font-family: "Roboto", sans-serif;
+    background: linear-gradient(to right bottom, #1b1b1e, #333);
+  }
+
+  .container {
+    display: flex;
+
+
+  }
+
+  .list {
+    flex: 0 0 20rem;
+  }
+
+  .list__item {
+    position: relative;
+  }
+
+  .list__item:hover>.label {
+    color: #009688;
+  }
+
+  .list__item:hover>.label::before {
+    border: 0.3rem solid #009688;
+    margin-right: 2rem;
+  }
+
+  .radio-btn {
+    position: absolute;
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .radio-btn:checked+.label {
+    color: #009688;
+  }
+
+  .radio-btn:checked+.label::before {
+    margin-right: 2rem;
+    border: 0.2rem solid #009688;
+    background: #fff;
+  }
+
+  .label {
+    display: flex;
+    align-items: center;
+    padding: 0.65rem 0;
+    color: rgb(53, 53, 53);
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.25s linear;
+  }
+
+  .label::before {
+    display: inline-block;
+    content: "";
+    height: 1.125rem;
+    width: 1.125rem;
+    margin-right: 0.625rem;
+    border: 0.4rem solid rgb(145, 145, 145);
+    border-radius: 50%;
+    transition: all 0.25s linear;
+  }
+
+  nav ul {
+    height: 400px;
+  }
+
+  nav ul {
+    overflow: hidden;
+    overflow-y: scroll;
+  }
+</style>
+
+
+<script>
+
+  var number;
+  var sent = 0;
+
+  function required(inputtx) 
+   {
+     if (inputtx.length == 0)
+      { 
+         //alert("message");  	
+         return false; 
+      }  	
+      return true; 
+    }
+  
+  function validateTextField(field)
+  {
+    if(!required(field.value))
+    {
+      field.style.border="2px solid red";
+      return 0;
+    }
+    else
+    {
+      field.style.border="";
+      return 1;
+    }
+  }
+  var Map = {};
+  Map["udar"] = 5;
+  Map["bam"] = 5;
+  Map["baloon"] = 5;
+  Map["radio"] = 5;
+  Map["flash"] = 5;
+  Map["charge"] = 5;
+  Map["glove"] = 5;
+
+  function validInventory()
+  {
+    var valid = 0;
+    if(!validateTextField(document.getElementsByName('udar')[0]))
+    {
+      valid++;
+    }
+    if(!validateTextField(document.getElementsByName('bam')[0]))
+    {
+      valid++;
+    }
+    if(!validateTextField(document.getElementsByName('baloon')[0]))
+    {
+      valid++;
+    }
+    if(!validateTextField(document.getElementsByName('radio')[0]))
+    {
+      valid++;
+    }
+    if(!validateTextField(document.getElementsByName('flash')[0]))
+    {
+      valid++;
+    }
+    if(!validateTextField(document.getElementsByName('charge')[0]))
+    {
+      valid++;
+    }
+    if(!validateTextField(document.getElementsByName('glove')[0]))
+    {
+      valid++;
+    }
+    return valid;
+  }
+  function sub() {
+
+    if(sent==1)
+    {
+      console.log("exit");
+      return;
+    }
+    sent = 1;
+    var v = document.getElementsByName('formNum')[0].value;
+    var date = document.getElementsByName('dd')[0].value;
+
+    var start = document.getElementsByName('starttime')[0].value;
+    var end = document.getElementsByName('endtime')[0].value;
+
+    var startdk = document.querySelector('.dk').checked;
+
+    var enddk = document.querySelector('.enddk').checked;
+    var dkname = document.getElementsByName('dkname')[0].value;
+    var money = document.getElementsByName('money')[0].value;
+    var name = document.getElementsByName('name')[0].value;
+    var guests = document.getElementById("subject2");
+    var stay = document.getElementById("subject");
+
+    //console.log(guests.value );
+    var valid = 0;
+
+    if(!validateTextField(document.getElementsByName('dkname')[0]))
+    {
+      valid++;
+    }
+
+    if(!validateTextField(document.getElementsByName('name')[0]))
+    {
+      valid++;
+    }
+    if(!validateTextField(document.getElementsByName('money')[0]))
+    {
+      valid++;
+    }
+    if(!validateTextField(document.getElementsByName('starttime')[0]))
+    {
+      valid++;
+    }
+    if(!validateTextField(document.getElementsByName('endtime')[0]))
+    {    
+      valid++;
+    }
+    if(startdk === false)
+    {
+      document.getElementById("sdk").style = "border-bottom: 2px red solid ;";
+      valid++;
+    }
+    else if(startdk === true)
+    {
+      document.getElementById("sdk").style="";
+    }
+    var open = document.getElementById("a-opt");
+    var close = document.getElementById("b-opt");
+    var none = document.getElementById("c-opt");
+
+    if(open.checked == true || close.checked == true)
+    {
+      var inv = validInventory();
+      if(inv>0)
+      {
+        valid++;
+      }
+    }
+    if(close.checked == true)
+    {
+      if(enddk == false)
+      {
+        document.getElementById("edk").style = "border-bottom: 2px red solid ;";
+        valid++;
+      }
+      else
+      {
+        document.getElementById("edk").style=""
+      }
+    }
+    if(valid>0)
+    {
+      sent = 0;
+      document.getElementsByName('error')[0].innerText  = "Не все поля заполнены";
+      return;
+    }
+    document.getElementsByName('error')[0].innerText  = "";
+    var url = "http://localhost:8888/subdo";
+
+    var params = "num=" + v + "&date=" + date + "&dk=" + dkname + "&start=" + startdk + "&end=" + enddk + "&money=" + money + 
+    "&s=" + start + "&e=" + end + "&name=" + name+"&guest="+guests.value+"&stay="+stay.value;
+    var http = new XMLHttpRequest();
+    http.open("GET", url + "?" + params, true);
+    http.onreadystatechange = function () {
+      if (http.readyState == 4 && http.status == 200) {
+
+        
+        html2canvas(document.body).then(function (canvas) {
+          document.body.appendChild(canvas);
+          saveAs(canvas.toDataURL(), 'doN'+v+'.png');
+          window.open("http://localhost:8888/thanks", "_top");
+
+        });
+      }
+
+    }
+
+    http.send(null);
+  }
+  function saveAs(uri, filename) {
+
+    var link = document.createElement('a');
+
+    if (typeof link.download === 'string') {
+
+      link.href = uri;
+      link.download = filename;
+
+      //Firefox requires the link to be in the body
+      document.body.appendChild(link);
+
+      //simulate click
+      link.click();
+
+      //remove the link when done
+      document.body.removeChild(link);
+
+    } else {
+
+      window.open(uri);
+
+    }
+  }
+  function loadPage() {
+
+    var url = "http://localhost:8888/dnum";
+    var http = new XMLHttpRequest();
+    http.open("GET", url, true);
+    http.onreadystatechange = function () {
+      if (http.readyState == 4 && http.status == 200) {
+        number = http.response;
+        number = parseInt(number, 10)
+        document.getElementsByName('formNum')[0].value = number;
+        //console.log(http.response);
+      }
+
+    }
+
+    http.send(null);
+
+
+    //var myDate = document.querySelector(myDate);
+    var today = new Date();
+    document.getElementsByName('dd')[0].value = today.toISOString().substr(0, 10);
+
+    var rad1 = document.getElementById("a-opt");
+    var rad2 = document.getElementById("b-opt");
+    var rad3 = document.getElementById("c-opt");
+    document.getElementById("stock").style.visibility = "hidden"
+    document.getElementById("stay").style.visibility = "hidden";
+    document.getElementById("endtodk").style.visibility = "hidden";
+
+    rad1.addEventListener('change', function () {
+      if (rad1.value == "on") {
+        document.getElementById("stock").style.visibility = "visible";
+        document.getElementById("stay").style.visibility = "hidden";
+        document.getElementById("endtodk").style.visibility = "hidden";
+        document.getElementsByName('formNum')[0].value = number+1;
+      }
+    });
+    rad2.addEventListener('change', function () {
+      if (rad1.value == "on") {
+        document.getElementById("stock").style.visibility = "visible";
+        document.getElementById("stay").style.visibility = "visible";
+        document.getElementById("endtodk").style.visibility = "visible";
+        document.getElementsByName('formNum')[0].value = number;
+      }
+    });
+    rad3.addEventListener('change', function () {
+      if (rad1.value == "on") {
+        document.getElementById("stock").style.visibility = "hidden";
+        document.getElementById("stay").style.visibility = "hidden";
+        document.getElementById("endtodk").style.visibility = "hidden";
+        document.getElementsByName('formNum')[0].value = number;
+      }
+    });
+    var Map = {};
+    Map["udar"] = 5;
+    Map["bam"] = 3;
+    Map["baloon"] = 2;
+    Map["radio"] = 1;
+    Map["flash"] = 5;
+    Map["charge"] = 2;
+    Map["glove"] = 1;
+
+    var names = ["udar", "bam", "baloon", "radio", "flash", "charge", "glove"];
+    for(var i=0; i< names.length;i++)
+    {
+      document.getElementsByName(names[i])[0].value =Map[names[i]];
+    }
+  
+  }
+
+</script>
+
+
+<head>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="shortcut icon" href="https://pp.userapi.com/c636028/v636028852/42ec/UWcdUoi_Lw4.jpg?ava=1" />
+  
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+</head>
+
+<body onload="loadPage()">
+
+  <div class="w3-col w3-container w3-light-grey " style="width:100%">
+    <div class="w3-row">
+      <div class="w3-col w3-container w3-light-grey w3-round-xxlarge" style="width:15%">
+        <label for="fname">Номер Формы</label><br>
+        <input type="number" id="fname" name="formNum" placeholder="Номер формы...">
+      </div>
+
+      <div class="w3-col w3-container w3-light-grey" style="width:20%">
+        <div class="w3-row">
+          <div class="w3-col w3-container w3-light-grey" style="width:100%">
+            <label for="fname">Дата </label><br>
+            <input name="dd" type="date">
+          </div>
+        </div>
+        <div class="w3-row">
+          <div class="w3-col w3-container w3-light-grey" style="width:100%">
+            <label for="fname">ДК</label><br>
+            <input type="text" id="fname" name="dkname" placeholder="ДК ФИО">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="w3-row">
+      <div class="w3-col w3-container w3-light-grey w3-round-xxlarge" style="width:30%">
+        <label class="containerС" ><font id="sdk">Дежурство отмечено у ДК</font>
+          <input class="dk" type="checkbox">
+          <span class="checkmark"></span>
+        </label>
+      </div>
+    </div>
+
+    <hr style="  border: 1px solid green;
+                     border-radius: 5px;" width="50%">
+    <div class="w3-row">
+      <div class="w3-row">
+        <div class="w3-col w3-container w3-light-grey w3-round-xxlarge" style="width:20%">
+          <div class="w3-row">
+            <div class="w3-col w3-container w3-light-grey w3-round-xxlarge" style="width:100%">
+              <label for="fname">Время Начала</label><br>
+              <input type="time" id="fname" name="starttime" placeholder="Номер формы...">
+            </div>
+
+          </div>
+          <div class="w3-row">
+            <div class="w3-col w3-container w3-light-grey w3-round-xxlarge" style="width:100%">
+              <label for="fname">Время окончания</label><br>
+              <input type="time" id="fname" name="endtime" placeholder="Номер формы...">
+            </div>
+
+          </div>
+        </div>
+        <div class="w3-col w3-container w3-light-grey w3-round-xxlarge" style="width:20%">
+          <label for="fname">ФИО дежурного</label><br>
+          <input type="text" id="fname" name="name" placeholder="Имя">
+          <div class="container">
+            <ul class="list" style=" list-style-type: none">
+              <li class="list__item">
+                <input type="radio" class="radio-btn" name="choice" id="a-opt" />
+                <label for="a-opt" class="label">Открывающий ДО</label>
+              </li>
+
+              <li class="list__item">
+                <input type="radio" class="radio-btn" name="choice" id="b-opt" />
+                <label for="b-opt" class="label">Закрывающий ДО</label>
+              </li>
+              <li class="list__item">
+                <input type="radio" class="radio-btn" name="choice" id="c-opt" checked="checked" />
+                <label for="c-opt" class="label">Ни то ни другое</label>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="w3-col w3-container w3-light-grey w3-round-xxlarge" style="width:10%">
+          <label for="fname">Баланс стового</label><br>
+          <input type="number" id="fname" name="money" placeholder="...">
+        </div>
+        <div class="w3-col w3-container w3-light-grey  w3-round-xxlarge" id="stock" style="width:20%">
+          <nav>
+            <ul>
+              <li>
+                <font style="font-size:15px">Удары M1+M2</font>
+                <input type="number" id="fname" name="udar" placeholder="Количество">
+              </li>
+              <li>
+                <font style="font-size:15px">БАМ</font>
+                <input type="number" id="fname" name="bam" placeholder="Количество">
+              </li>
+
+              <li>
+                <font style="font-size:15px">Балончик</font>
+                <input type="number" id="fname" name="baloon" placeholder="Количество">
+              </li>
+              <li>
+                <font style="font-size:15px">Рация</font>
+                <input type="number" id="fname" name="radio" placeholder="Количество">
+              </li>
+              <li>
+                <font style="font-size:15px">Фонарики</font>
+                <input type="number" id="fname" name="flash" placeholder="Количество">
+              </li>
+              <li>
+                <font style="font-size:15px">Зарядки(рация/ДО)</font>
+                <input type="number" id="fname" name="charge" placeholder="Количество">
+              </li>
+              <li>
+                <font style="font-size:15px">Перчатки</font>
+                <input type="number" id="fname" name="glove" placeholder="Количество">
+              </li>
+
+            </ul>
+          </nav>
+
+        </div>
+      </div>
+    </div>
+    <hr style="  border: 1px solid black;
+                     border-radius: 5px;" width="50%">
+    <div class="w3-row" id="endtodk">
+      <div class="w3-col w3-container w3-light-grey w3-round-xxlarge" style="width:30%">
+        <label class="containerС"><font id="edk">Окончание отмечено у ДК</font>
+          <input class="enddk" type="checkbox">
+          <span class="checkmark"></span>
+        </label>
+      </div>
+    </div>
+    <div class="w3-row" id="stay2" >
+      <div class="w3-col w3-container w3-light-grey " style="width:40%">
+        <label for="subject">Дополнительно(гости)</label>
+        <textarea id="subject2" name="last2" placeholder="Write something.." style="height:100px"></textarea>
+
+      </div>
+    </div>
+    <div class="w3-row" id="stay" >
+      <div class="w3-col w3-container w3-light-grey " style="width:40%" >
+        <label for="subject">В опронике ночуют</label>
+        <textarea id="subject" name="last" placeholder="Write something.." style="height:100px"></textarea>
+
+      </div>
+    </div>
+    <div class="w3-row">
+      <br>
+    </div>
+    <div class="w3-row">
+      <div class="w3-col w3-container w3-light-grey " style="width:40%">
+        <h4 id="error" name = "error" style="color:red;"></h4>
+        <input type="submit" value="Submit" onclick="sub()">
+      </div>
+    </div>
+
+  </div>
+
+
+
+</body>

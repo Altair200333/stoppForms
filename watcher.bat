@@ -1,0 +1,1 @@
+wscript.exe invis.vbs server.bat %*

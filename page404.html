@@ -1,0 +1,137 @@
+<style>
+  body {
+  font: 400 1em/1.5 "Neuton";
+  background: #090d00;
+  color: rgba(255, 255, 255, .25);
+  text-align: center;
+  margin: 0;
+}
+p {
+  text-transform: uppercase;
+  letter-spacing: 0.5em;
+  display: inline-block;
+  border: 4px double rgba(255, 255, 255, .25);
+  border-width: 4px 0;
+  padding: 1.5em 0em;
+  position: absolute;
+  top: 18%;
+  left: 50%;
+  width: 40em;
+  margin: 0 0 0 -20em;
+}
+p span {
+  font: 700 4em "Oswald", sans-serif;
+  letter-spacing: 0;
+  padding: 0.25em 0 0.325em;
+  display: block;
+  margin: 0 auto;
+  text-shadow: 0 0 80px rgba(255, 255, 255, .5);
+  /* Clip Background Image */
+  background: url(http://f.cl.ly/items/010q3E1u3p2Q0j1L1S1o/animated_text_fill.png) repeat-y;
+  -webkit-background-clip: text;
+  background-clip: text;
+  /* Animate Background Image */
+  -webkit-text-fill-color: transparent;
+  -webkit-animation: aitf 80s linear infinite;
+  /* Activate hardware acceleration for smoother animations */
+  -webkit-transform: translate3d(0, 0, 0);
+  -webkit-backface-visibility: hidden;
+}
+/* Animate Background Image */
+@-webkit-keyframes aitf {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+ul{
+	display: flex;
+	width: 100%;
+	height: 80vh;
+	margin: auto;
+	max-width: 1000px;
+	justify-content: space-between;
+	text-align: center;
+  margin-top: 100px;
+}
+li {
+	padding: 1rem 2rem 1.15rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  color: #ebebeb;
+	min-width: 80px;
+	margin: auto;
+}
+li:hover {
+  background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/HILLBLU_button_background.svg/1200px-HILLBLU_button_background.svg.png');
+  background-size: 100% 100%;
+  color: #27262c;
+  animation: spring 300ms ease-out;
+  text-shadow: 0 -1px 0 #ef816c;
+	font-weight: bold;
+}
+li:active {
+  transform: translateY(4px);
+}
+@keyframes spring {
+  15% {
+    -webkit-transform-origin: center center;
+    -webkit-transform: scale(1.2, 1.1);
+  }
+  40% {
+    -webkit-transform-origin: center center;
+    -webkit-transform: scale(0.95, 0.95);
+  }
+  75% {
+    -webkit-transform-origin: center center;
+    -webkit-transform: scale(1.05, 1);
+  }
+  100% {
+    -webkit-transform-origin: center center;
+    -webkit-transform: scale(1, 1);
+  }
+</style>
+<html>
+    <head>
+            <title>The site</title>
+            <link rel="shortcut icon" href="https://pp.userapi.com/c636028/v636028852/42ec/UWcdUoi_Lw4.jpg?ava=1" />
+            
+    </head>
+    <script>
+     
+      function main()
+      {
+          var url = "http://localhost:8888/main";
+          var http = new XMLHttpRequest();
+          http.open("GET", url, true);
+          http.onreadystatechange = function()
+          {
+              if(http.readyState == 4 && http.status == 200) {
+                //document.body.innerHTML = '';
+                //document.head.innerHTML = '';
+                //document.write(http.response);
+                //window.onload();
+                window.open("http://localhost:8888/main", "_top");
+              //alert(http.responseText);
+          }
+          }
+  
+          http.send(null);        
+      }
+  </script>
+    <body>
+            <p>
+                    Заполнение форм by Neo
+                    <span>
+                      Ошибка - 404
+                    </span>
+                    &mdash; Страница не найдена &mdash;
+            </p> 
+            <!-- Если не лень будет, воткни норм пикчу на фон кнопки, а не этот вырви-глаз-->
+            <ul>
+              <li onclick="main()"><font style="font-size:20px">Главная</font></li>
+          </ul>
+    </body>
+</html>
